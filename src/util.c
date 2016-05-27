@@ -262,7 +262,7 @@ void freedir(struct dir *dr) {
 
   /* update sizes of parent directories if this isn't a hard link.
    * If this is a hard link, freedir_hlnk() would have done so already */
-  addparentstats(dr->parent, dr->flags & FF_HLNKC ? 0 : -dr->size, dr->flags & FF_HLNKC ? 0 : -dr->asize, -(dr->items+1));
+  subparentstats(dr->parent, dr->flags & FF_HLNKC ? 0 : dr->size, dr->flags & FF_HLNKC ? 0 : dr->asize, (dr->items+1));
 
   free(dr);
 }
@@ -315,10 +315,19 @@ struct dir *getroot(struct dir *d) {
 
 
 void addparentstats(struct dir *d, uint64_t size, uint64_t asize, uint64_t items) {
-  while(d) {
+  if(d) {
     d->size = addu64(d->size, size);
     d->asize = addu64(d->asize, asize);
     d->items = addu64(d->items,items);
+    d = d->parent;
+  }
+}
+
+void subparentstats(struct dir *d, uint64_t size, uint64_t asize, uint64_t items) {
+  while(d) {
+    d->size = subu64(d->size, size);
+    d->asize = subu64(d->asize, asize);
+    d->items = subu64(d->items,items);
     d = d->parent;
   }
 }

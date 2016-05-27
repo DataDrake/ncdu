@@ -95,8 +95,11 @@ struct dir *getroot(struct dir *);
  * overflow. No need to check for positive overflow, as the operands are always positive. */
 #define subu64(a, b) ((a) < (b) ? 0 : (a)-(b))
 
-/* Adds a value to the size, asize and items fields of *d and its parents */
+/* Adds a value to the size, asize and items fields of *d and its immediate parent */
 void addparentstats(struct dir *, uint64_t, uint64_t, uint64_t);
+
+/* Subtracts a value to the size, asize and items fields of *d and its parents */
+void subparentstats(struct dir *, uint64_t, uint64_t, uint64_t);
 
 
 /* A simple stack implemented in macros */

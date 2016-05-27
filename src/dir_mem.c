@@ -134,6 +134,10 @@ static int item(struct dir *item) {
 
   /* Go back to parent dir */
   if(!item) {
+    if(curdir->parent){
+        curdir->parent->size = addu64(curdir->parent->size,curdir->size);
+        curdir->parent->items = addu64(curdir->parent->items,curdir->items);
+    }
     curdir = curdir->parent;
     return 0;
   }
