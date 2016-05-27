@@ -71,7 +71,7 @@ struct ctx {
   int line;
   int byte;
   int eof;
-  int items;
+  uint64_t items;
   int level;
   char *buf; /* points into readbuf, always zero-terminated. */
   char *lastfill; /* points into readbuf, location of the zero terminator. */
@@ -453,10 +453,10 @@ static int iteminfo(struct dir **item, uint64_t dev, int isdir) {
       memcpy(tmp, d, SDIRSIZE-1);
       d = tmp;
     } else if(strcmp(ctx->val, "asize") == 0) {      /* asize */
-      C(rint64(&iv, INT64_MAX));
+      C(rint64(&iv, UINT64_MAX));
       d->asize = iv;
     } else if(strcmp(ctx->val, "dsize") == 0) {      /* dsize */
-      C(rint64(&iv, INT64_MAX));
+      C(rint64(&iv, UINT64_MAX));
       d->size = iv;
     } else if(strcmp(ctx->val, "dev") == 0) {        /* dev */
       C(rint64(&iv, UINT64_MAX));

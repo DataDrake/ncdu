@@ -85,8 +85,8 @@ static void hlink_check(struct dir *d) {
           if(pt==par)
             i=0;
     if(i) {
-      par->size = adds64(par->size, d->size);
-      par->asize = adds64(par->size, d->asize);
+      par->size = addu64(par->size, d->size);
+      par->asize = addu64(par->size, d->asize);
     }
   }
 }

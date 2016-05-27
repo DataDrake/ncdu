@@ -190,10 +190,10 @@ void dir_draw() {
     if(dir_fatalerr)
       fprintf(stderr, "\r%s.\n", dir_fatalerr);
     else if(dir_output.size)
-      fprintf(stderr, "\r%-55s %8d files /%s",
+      fprintf(stderr, "\r%-55s %20lu files /%s",
         cropstr(dir_curpath, 55), dir_output.items, formatsize(dir_output.size));
     else
-      fprintf(stderr, "\r%-65s %8d files", cropstr(dir_curpath, 65), dir_output.items);
+      fprintf(stderr, "\r%-65s %20lu files", cropstr(dir_curpath, 65), dir_output.items);
     break;
   case 2:
     browse_draw();

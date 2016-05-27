@@ -36,7 +36,7 @@ static FILE *stream;
 /* Stack of device IDs, also used to keep track of the level of nesting */
 struct stack {
   uint64_t *list;
-  int size, top;
+  uint64_t size, top;
 } stack;
 
 
@@ -63,7 +63,7 @@ static void output_string(const char *str) {
 
 static void output_int(uint64_t n) {
   char tmp[20];
-  int i = 0;
+  uint64_t i = 0;
 
   do
     tmp[i++] = n % 10;
@@ -82,11 +82,11 @@ static void output_info(struct dir *d) {
   /* No need for asize/dsize if they're 0 (which happens with excluded or failed-to-stat files) */
   if(d->asize) {
     fputs(",\"asize\":", stream);
-    output_int((uint64_t)d->asize);
+    output_int(d->asize);
   }
   if(d->size) {
     fputs(",\"dsize\":", stream);
-    output_int((uint64_t)d->size);
+    output_int(d->size);
   }
 
   if(d->dev != nstack_top(&stack, 0)) {

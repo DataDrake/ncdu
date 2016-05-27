@@ -78,7 +78,7 @@ extern int dirlist_sort_desc, dirlist_sort_col, dirlist_sort_df;
 extern int dirlist_hidden;
 
 /* maximum size of an item in the opened dir */
-extern int64_t dirlist_maxs, dirlist_maxa;
+extern uint64_t dirlist_maxs, dirlist_maxa;
 
 
 #endif

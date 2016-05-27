@@ -69,10 +69,10 @@ void ncprint(int, int, char *, ...);
 char *cropstr(const char *, int);
 
 /* formats size in the form of xxx.xXB */
-char *formatsize(int64_t );
+char *formatsize(uint64_t );
 
 /* int2string with thousand separators */
-char *fullsize(int64_t);
+char *fullsize(uint64_t);
 
 /* read locale information from the environment */
 void read_locale();
@@ -87,17 +87,16 @@ char *getpath(struct dir *);
 /* returns the root element of the given dir struct */
 struct dir *getroot(struct dir *);
 
-/* Add two signed 64-bit integers. Returns INT64_MAX if the result would
- * overflow, or 0 if it would be negative. At least one of the integers must be
- * positive.
- * I use uint64_t's to detect the overflow, as (a + b < 0) relies on undefined
- * behaviour, and (INT64_MAX - b >= a) didn't work for some reason. */
-#define adds64(a, b) ((a) > 0 && (b) > 0\
-    ? ((uint64_t)(a) + (uint64_t)(b) > (uint64_t)INT64_MAX ? INT64_MAX : (a)+(b))\
-    : (a)+(b) < 0 ? 0 : (a)+(b))
+/* Add two unsigned 64-bit integers. Returns UINT64_MAX if the result would
+ * overflow. No need to check for negative sizes, as the operands are always positive.*/
+#define addu64(a, b) ((UINT64_MAX - (a)) <= (b) ? UINT64_MAX : (a)+(b))
+
+/* Subtract two unsigned 64-bit integers. Returns 0 if the result would
+ * overflow. No need to check for positive overflow, as the operands are always positive. */
+#define subu64(a, b) ((a) < (b) ? 0 : (a)-(b))
 
 /* Adds a value to the size, asize and items fields of *d and its parents */
-void addparentstats(struct dir *, int64_t, int64_t, int);
+void addparentstats(struct dir *, uint64_t, uint64_t, uint64_t);
 
 
 /* A simple stack implemented in macros */

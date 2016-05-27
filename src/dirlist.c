@@ -31,8 +31,8 @@
 /* public variables */
 struct dir *dirlist_parent = NULL,
            *dirlist_par    = NULL;
-int64_t dirlist_maxs       = 0,
-        dirlist_maxa       = 0;
+uint64_t dirlist_maxs       = 0,
+         dirlist_maxa       = 0;
 
 int    dirlist_sort_desc   = 1,
        dirlist_sort_col    = DL_COL_SIZE,

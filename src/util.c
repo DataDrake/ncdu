@@ -60,7 +60,7 @@ char *cropstr(const char *from, int s) {
 }
 
 
-char *formatsize(int64_t from) {
+char *formatsize(uint64_t from) {
   static char dat[10]; /* "xxx.x MiB" */
   float r = from;
   char c = ' ';
@@ -88,10 +88,10 @@ char *formatsize(int64_t from) {
 }
 
 
-char *fullsize(int64_t from) {
+char *fullsize(uint64_t from) {
   static char dat[26]; /* max: 9.223.372.036.854.775.807  (= 2^63-1) */
   char tmp[26];
-  int64_t n = from;
+  uint64_t n = from;
   int i, j;
 
   /* the K&R method - more portable than sprintf with %lld */
@@ -215,8 +215,8 @@ static void freedir_hlnk(struct dir *d) {
           if(pt==par)
             i=0;
     if(i) {
-      par->size = adds64(par->size, -d->size);
-      par->asize = adds64(par->size, -d->asize);
+      par->size = subu64(par->size, d->size);
+      par->asize = subu64(par->size, d->asize);
     }
   }
 
@@ -314,11 +314,11 @@ struct dir *getroot(struct dir *d) {
 }
 
 
-void addparentstats(struct dir *d, int64_t size, int64_t asize, int items) {
+void addparentstats(struct dir *d, uint64_t size, uint64_t asize, uint64_t items) {
   while(d) {
-    d->size = adds64(d->size, size);
-    d->asize = adds64(d->asize, asize);
-    d->items += items;
+    d->size = addu64(d->size, size);
+    d->asize = addu64(d->asize, asize);
+    d->items = addu64(d->items,items);
     d = d->parent;
   }
 }
