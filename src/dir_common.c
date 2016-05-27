@@ -131,7 +131,7 @@ static void draw_progress() {
 
   nccreate(10, width, antext);
 
-  ncprint(2, 2, "Total items: %-8d", dir_output.items);
+  ncprint(2, 2, "Total items: %-20d", dir_output.items);
   if(dir_output.size)
     ncprint(2, 23, "size: %s", formatsize(dir_output.size));
   ncprint(3, 2, "Current item: %s", cropstr(dir_curpath, width-18));
