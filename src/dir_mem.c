@@ -85,8 +85,7 @@ static void hlink_check(struct dir *d) {
           if(pt==par)
             i=0;
     if(i) {
-      par->size = addu64(par->size, d->size);
-      par->asize = addu64(par->size, d->asize);
+      addparentstats(par,d->size,d->asize,0);
     }
   }
 }
@@ -134,10 +133,6 @@ static int item(struct dir *item) {
 
   /* Go back to parent dir */
   if(!item) {
-    if(curdir->parent){
-        curdir->parent->size = addu64(curdir->parent->size,curdir->size);
-        curdir->parent->items = addu64(curdir->parent->items,curdir->items);
-    }
     curdir = curdir->parent;
     return 0;
   }

@@ -133,7 +133,7 @@ static void draw_progress() {
 
   ncprint(2, 2, "Total items: %-20d", dir_output.items);
   if(dir_output.size)
-    ncprint(2, 23, "size: %s", formatsize(dir_output.size));
+    ncprint(2, 35, "size: %s", formatsize(dir_output.size));
   ncprint(3, 2, "Current item: %s", cropstr(dir_curpath, width-18));
   if (confirm_quit_while_scanning_stage_1_passed)
     ncaddstr(8, width-26, "Press y to confirm abort");

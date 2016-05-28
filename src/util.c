@@ -315,7 +315,7 @@ struct dir *getroot(struct dir *d) {
 
 
 void addparentstats(struct dir *d, uint64_t size, uint64_t asize, uint64_t items) {
-  if(d) {
+  while(d) {
     d->size = addu64(d->size, size);
     d->asize = addu64(d->asize, asize);
     d->items = addu64(d->items,items);
