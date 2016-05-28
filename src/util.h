@@ -98,9 +98,6 @@ struct dir *getroot(struct dir *);
 /* Adds a value to the size, asize and items fields of *d and its parents */
 void addparentstats(struct dir *, uint64_t, uint64_t, uint64_t);
 
-/* Adds a value to the size, asize and items fields of *d and its immediate parent */
-void addparentstatsonce(struct dir *, uint64_t, uint64_t, uint64_t);
-
 /* Subtracts a value to the size, asize and items fields of *d and its parents */
 void subparentstats(struct dir *, uint64_t, uint64_t, uint64_t);
 
